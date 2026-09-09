@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MrScofield</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Inter, sans-serif;
+    min-height:100vh;
+    background:#070912;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+}
+
+/* subtle background */
+
+body:before{
+    content:"";
+    position:fixed;
+    width:420px;
+    height:420px;
+    background:#1687d9;
+    opacity:.07;
+    filter:blur(140px);
+    top:-180px;
+    left:-180px;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    background:#7447e8;
+    opacity:.06;
+    filter:blur(140px);
+    right:-180px;
+    bottom:-150px;
+}
+
+/* card */
+
+.card{
+    position:relative;
+    width:100%;
+    max-width:430px;
+
+    background:#0d101b;
+
+    border:1px solid #1b2231;
+    border-radius:24px;
+
+    padding:34px 26px 25px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.55);
+
+    overflow:hidden;
+}
+
+/* tiny top line */
+
+.card:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:30px;
+    right:30px;
+    height:1px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #38bdf8,
+        transparent
+    );
+
+    opacity:.5;
+}
+
+/* profile */
+
+.profile{
+    text-align:center;
+}
+
+.avatar{
+    width:76px;
+    height:76px;
+
+    margin:0 auto 17px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(145deg,#172033,#0b0e17);
+
+    border:1px solid #273247;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#64748b;
+    font-size:24px;
+    font-weight:700;
+
+    overflow:hidden;
+}
+
+/*
+To add Michael Scofield later:
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+*/
+
+.badge{
+    display:inline-block;
+
+    padding:6px 11px;
+
+    border-radius:8px;
+
+    background:#101827;
+    border:1px solid #1d3045;
+
+    color:#7dd3fc;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin-bottom:13px;
+}
+
+h1{
+    font-size:34px;
+    font-weight:800;
+
+    letter-spacing:-1.2px;
+
+    margin-bottom:7px;
+}
+
+.description{
+    color:#78859a;
+    font-size:13px;
+
+    margin-bottom:26px;
+}
+
+/* button */
+
+.main-btn{
+    width:100%;
+
+    border:0;
+    border-radius:13px;
+
+    padding:15px;
+
+    background:#1687d9;
+
+    color:white;
+
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.main-btn:hover{
+    background:#2197ea;
+    transform:translateY(-1px);
+}
+
+.main-btn:active{
+    transform:scale(.98);
+}
+
+/* info */
+
+.info{
+    display:flex;
+
+    margin-top:18px;
+
+    border-top:1px solid #181e2b;
+    border-bottom:1px solid #181e2b;
+}
+
+.info-item{
+    flex:1;
+
+    padding:13px 5px;
+
+    text-align:center;
+
+    color:#667085;
+
+    font-size:10px;
+}
+
+.info-item + .info-item{
+    border-left:1px solid #181e2b;
+}
+
+.info-item strong{
+    display:block;
+
+    color:#b7c0ce;
+
+    font-size:12px;
+
+    margin-bottom:3px;
+}
+
+/* footer */
+
+.footer{
+    text-align:center;
+
+    margin-top:19px;
+
+    color:#3f4a5c;
+
+    font-size:10px;
+}
+
+/* pages */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+
+    animation:show .25s ease;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(7px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* page 2 */
+
+.success{
+    text-align:center;
+}
+
+.success-mark{
+    width:60px;
+    height:60px;
+
+    margin:0 auto 16px;
+
+    border-radius:17px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#0c2419;
+    border:1px solid #17472c;
+
+    color:#4ade80;
+
+    font-size:25px;
+}
+
+.success h2{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.success p{
+    color:#718096;
+    font-size:13px;
+
+    margin-bottom:22px;
+}
+
+/* code */
+
+.code-container{
+    text-align:left;
+
+    background:#080b12;
+
+    border:1px solid #1b2432;
+
+    border-radius:14px;
+
+    padding:15px;
+
+    margin-bottom:11px;
+}
+
+.code-header{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    color:#536174;
+
+    font-size:9px;
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin-bottom:10px;
+}
+
+.online{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+}
+
+.code-container code{
+    display:block;
+
+    color:#a9c9e8;
+
+    font-family:monospace;
+    font-size:11px;
+
+    line-height:1.7;
+
+    word-break:break-all;
+}
+
+/* copy */
+
+.copy{
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    background:#111722;
+
+    border:1px solid #202b3b;
+
+    color:#d4dbe5;
+
+    font-family:inherit;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.copy:hover{
+    background:#151d2b;
+    border-color:#304158;
+}
+
+.copy.copied{
+    color:#86efac;
+    border-color:#21633c;
+    background:#0d2117;
+}
+
+/* back */
+
+.back{
+    display:block;
+
+    margin:18px auto 0;
+
+    width:max-content;
+
+    color:#566276;
+
+    font-size:12px;
+
+    cursor:pointer;
+}
+
+.back:hover{
+    color:#9aa8bb;
+}
+
+/* status */
+
+.status{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+
+    margin-top:16px;
+
+    color:#4f5b6d;
+
+    font-size:10px;
+}
+
+.status-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+}
+
+/* mobile */
+
+@media(max-width:480px){
+
+    body{
+        padding:12px;
+    }
+
+    .card{
+        padding:30px 18px 22px;
+        border-radius:21px;
+    }
+
+    h1{
+        font-size:31px;
+    }
+
+    .avatar{
+        width:70px;
+        height:70px;
+    }
+
+    .main-btn{
+        padding:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- HOME -->
+
+    <div class="page active" id="home">
+
+        <div class="profile">
+
+            <div class="avatar">
+                MS
+            </div>
+
+            <div class="badge">
+                SCRIPT HUB
+            </div>
+
+            <h1>MrScofield</h1>
+
+            <div class="description">
+                Simple. Fast. Reliable Roblox scripts.
+            </div>
+
+        </div>
+
+        <button class="main-btn" id="getScript">
+            Get Script
+        </button>
+
+        <div class="info">
+
+            <div class="info-item">
+                <strong>2.3K+</strong>
+                Users
+            </div>
+
+            <div class="info-item">
+                <strong>24/7</strong>
+                Status
+            </div>
+
+            <div class="info-item">
+                <strong>FREE</strong>
+                Access
+            </div>
+
+        </div>
+
+        <div class="footer">
+            © 2026 MrScofield
+        </div>
+
+    </div>
+
+
+    <!-- SCRIPT PAGE -->
+
+    <div class="page" id="scriptPage">
+
+        <div class="success">
+
+            <div class="success-mark">
+                ✓
+            </div>
+
+            <h2>You're in.</h2>
+
+            <p>
+                Your script is ready to copy.
+            </p>
+
+        </div>
+
+        <div class="code-container">
+
+            <div class="code-header">
+                <span class="online"></span>
+                SCRIPT
+            </div>
+
+            <code id="scriptCode">loadstring(game:HttpGet("https://paste.fe4r.click/raw/3cb3d6db-fae3-4c69-9f06-e0c7c08092df"))()</code>
+
+        </div>
+
+        <button class="copy" id="copyBtn">
+            Copy Script
+        </button>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            Service online
+        </div>
+
+        <div class="back" id="back">
+            ← Back
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const home =
+    document.getElementById("home");
+
+const scriptPage =
+    document.getElementById("scriptPage");
+
+const getScript =
+    document.getElementById("getScript");
+
+const back =
+    document.getElementById("back");
+
+const copyBtn =
+    document.getElementById("copyBtn");
+
+const scriptCode =
+    document.getElementById("scriptCode");
+
+
+getScript.onclick = () => {
+
+    home.classList.remove("active");
+
+    setTimeout(() => {
+        scriptPage.classList.add("active");
+    },50);
+
+};
+
+
+back.onclick = () => {
+
+    scriptPage.classList.remove("active");
+
+    setTimeout(() => {
+        home.classList.add("active");
+    },50);
+
+    copyBtn.textContent = "Copy Script";
+    copyBtn.classList.remove("copied");
+
+};
+
+
+copyBtn.onclick = async () => {
+
+    const text =
+        scriptCode.textContent.trim();
+
+    try{
+
+        await navigator.clipboard.writeText(text);
+
+    }catch{
+
+        const area =
+            document.createElement("textarea");
+
+        area.value = text;
+
+        document.body.appendChild(area);
+
+        area.select();
+
+        document.execCommand("copy");
+
+        area.remove();
+
+    }
+
+    copyBtn.textContent = "✓ Copied";
+
+    copyBtn.classList.add("copied");
+
+    setTimeout(() => {
+
+        copyBtn.textContent = "Copy Script";
+
+        copyBtn.classList.remove("copied");
+
+    },2200);
+
+};
+
+</script>
+
+</body>
+</html>
